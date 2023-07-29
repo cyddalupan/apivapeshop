@@ -4,6 +4,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import status
 
 from .serializers import UserLoginSerializer
 
@@ -14,17 +15,14 @@ class LoginView(APIView):
   def get(self, request, *args, **kwargs):
       return Response({'is_logged_in': True})
 
-  def post(self, request, *args, **kwargs):
-      serializer = UserLoginSerializer(data=request.data)
-      serializer.is_valid(raise_exception=True)
+  def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
 
-      user = authenticate(
-          username=serializer.validated_data['username'],
-          password=serializer.validated_data['password']
-      )
+        user = authenticate(username=username, password=password)
 
-      if user:
-          token, created = Token.objects.get_or_create(user=user)
-          return Response({'token': token.key})
-      else:
-          return Response({'error': 'Invalid credentials'}, status=400)
+        if user:
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key})
+        else:
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
