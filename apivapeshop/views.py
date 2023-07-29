@@ -2,7 +2,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate, logout, login
-from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
@@ -16,7 +15,6 @@ class CheckLogin(APIView):
         return Response({'is_logged_in': True, 'username': user.username})
 
 class LoginView(APIView):
-
     def post(self, request):
         serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid():
@@ -35,7 +33,6 @@ class LoginView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LogoutView(APIView):
-
     def post(self, request):
         if request.user.is_authenticated:
             logout(request)

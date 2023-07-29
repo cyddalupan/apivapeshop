@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', LoginView.as_view(), name='login'),
     path('checklogin/', CheckLogin.as_view(), name='checklogin'),
-    path('inventory/', include('inventory.urls')),
 		path('logout/', LogoutView.as_view(), name='logout'),
+
+    path('inventory/', include('inventory.urls')),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
