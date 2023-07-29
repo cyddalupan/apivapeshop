@@ -1,6 +1,7 @@
 from django.urls import path
-from . import views
-   
+from .views import InventoryListCreateView, InventoryRetrieveUpdateDeleteView
+
 urlpatterns = [
-    # path('approval/', views.wiki_approval, name='wiki_approval'),
+    path('', InventoryListCreateView.as_view(), name='inventory-list-create'),
+    path('<int:pk>/', InventoryRetrieveUpdateDeleteView.as_view(), name='inventory-detail'),
 ]
