@@ -11,4 +11,5 @@ urlpatterns = [
 		path('logout/', LogoutView.as_view(), name='logout'),
 
     path('inventory/', include('inventory.urls')),
+    path('pos/', include('pos.urls')),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

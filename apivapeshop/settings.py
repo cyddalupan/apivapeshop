@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 		'corsheaders',
     'inventory',
-    # 'inventory.apps.InventoryConfig',
+		'pos',
 ]
 
 MIDDLEWARE = [
