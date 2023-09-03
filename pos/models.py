@@ -12,7 +12,7 @@ class Receipt(models.Model):
 	deleted_at = models.DateTimeField(null=True, blank=True, default=None)
 
 	def __str__(self):
-		return str(self.created_at)
+		return str(self.customer)
 
 class Order(models.Model):
 	receipt = models.ForeignKey(Receipt, on_delete=models.CASCADE)
@@ -26,6 +26,6 @@ class Order(models.Model):
 	deleted_at = models.DateTimeField(null=True, blank=True, default=None)
 
 	def __str__(self):
-		return (self.created_at)
+		return str(self.created_at)
 
 	
