@@ -6,6 +6,7 @@ class Inventory(models.Model):
   code = models.IntegerField()
   name = models.CharField(max_length=255)
   price = models.IntegerField()
+  stock = models.IntegerField()
   desc = models.TextField(null=True, blank=True, default="")
   created_at = models.DateTimeField(auto_now_add=True)
   created_by = models.ForeignKey(User, related_name='%(class)s_created', on_delete=models.SET_NULL, null=True, blank=True)
